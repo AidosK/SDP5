@@ -1,0 +1,82 @@
+import java.util.Random;
+
+// Factory Pattern
+abstract class VehicleFactory {
+    public abstract Vehicle createVehicle();
+}
+
+class CarFactory extends VehicleFactory {
+    @Override
+    public Vehicle createVehicle() {
+        return new Car();
+    }
+}
+
+class BicycleFactory extends VehicleFactory {
+    @Override
+    public Vehicle createVehicle() {
+        return new Bicycle();
+    }
+}
+
+class Vehicle {
+    private String type;
+
+    public Vehicle(String type) {
+        this.type = type;
+    }
+
+    public void assemble() {
+        System.out.println("Assembling a " + type);
+    }
+
+    public void paint() {
+        System.out.println("Painting the " + type);
+    }
+
+    public void ship() {
+        System.out.println("Shipping the " + type);
+    }
+}
+
+class Car extends Vehicle {
+    public Car() {
+        super("Car");
+    }
+
+    public void addWheels() {
+        System.out.println("Adding four wheels to the car");
+    }
+}
+
+class Bicycle extends Vehicle {
+    public Bicycle() {
+        super("Bicycle");
+    }
+
+    public void addPedals() {
+        System.out.println("Adding pedals to the bicycle");
+    }
+}
+
+public class VehicleManufacturingSystem {
+    public static void main(String[] args) {
+        VehicleFactory carFactory = new CarFactory();
+        VehicleFactory bicycleFactory = new BicycleFactory();
+
+        Vehicle car = carFactory.createVehicle();
+        Vehicle bicycle = bicycleFactory.createVehicle();
+
+        car.assemble();
+        car.addWheels();
+        car.paint();
+        car.ship();
+
+        System.out.println();
+
+        bicycle.assemble();
+        bicycle.addPedals();
+        bicycle.paint();
+        bicycle.ship();
+    }
+}
